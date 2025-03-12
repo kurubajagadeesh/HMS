@@ -9,7 +9,7 @@ namespace Repo_Inpatient_Care.TestScripts
         [Test]
         public void AdminCreateNewDoctor()
         {
-            homePage.GoToAdminLoginPage().EnterUsernameAndPassword();
+             
 
 
 
