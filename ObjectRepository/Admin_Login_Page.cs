@@ -33,15 +33,10 @@ namespace Repo_Inpatient_Care.ObjectRepository
         public Admin_DashboardPage EnterUsernameAndPassword()
         {
             Console.WriteLine("navigated to Admin login page");
-            //waituntilEleIsVisible(By.Name("username"),10, "admin");
-            //waituntilEleIsVisible(By.Name("password"), 10, "Test@12345");
-
-
+         
             Username_L.SendKeys("admin");
             Password_L.SendKeys("Test@12345");
             Submit_L.Click();
-
-
 
             return new Admin_DashboardPage(driver);
         }
