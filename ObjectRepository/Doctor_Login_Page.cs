@@ -1,7 +1,11 @@
-﻿
+
+
 using OpenQA.Selenium;
 using Repo_Inpatient_Care.NewFolder;
-using SeleniumExtras.PageObjects;
+using SeleniumExtras.PageObje
+using System.Net;
+
+
 
 namespace Repo_Inpatient_Care.ObjectRepository
 {
@@ -12,6 +16,7 @@ namespace Repo_Inpatient_Care.ObjectRepository
 
         public Doctor_Login_Page(IWebDriver driver)
         {
+
             PageFatory.initElements(driver, this);
         }
 
@@ -36,6 +41,7 @@ namespace Repo_Inpatient_Care.ObjectRepository
             username.SendKeys("Khan345@gmail.com");
             password.SendKeys("Test@123");
             submit.Click();
+            PageFactory.InitElement(driver, this); 
         }
     }
 }
