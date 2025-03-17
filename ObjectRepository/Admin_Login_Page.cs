@@ -7,10 +7,11 @@ using SeleniumExtras.WaitHelpers;
 
 namespace Repo_Inpatient_Care.ObjectRepository
 {
-    public class Admin_Login_Page: WebDriverUtility
+    //This is the Object Repository for Admin_Login_Page
+    public class Admin_Login_Page : WebDriverUtility
     {
-        private IWebDriver driver;
-        public Admin_Login_Page(IWebDriver driver) : base(driver)
+       
+        public Admin_Login_Page(IWebDriver driver): base(driver)
         {
              
              this.driver = driver;
