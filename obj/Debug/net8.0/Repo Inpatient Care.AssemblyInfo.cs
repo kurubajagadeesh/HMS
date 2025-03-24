@@ -14,6 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+72f2d8c886e6e2f524da1b734520c48309366d31")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8e42df913555fbac0ffa579438678b6137c7732b")]
 [assembly: System.Reflection.AssemblyProductAttribute("Repo Inpatient Care")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Repo Inpatient Care")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
