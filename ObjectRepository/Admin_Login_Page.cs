@@ -8,7 +8,7 @@ using SeleniumExtras.WaitHelpers;
 namespace Repo_Inpatient_Care.ObjectRepository
 {
     //This is the Object Repository for Admin_Login_Page
-    public class Admin_Login_Page : WebDriverUtility
+    public sealed class Admin_Login_Page : WebDriverUtility
     {
        
         public Admin_Login_Page(IWebDriver driver): base(driver)
@@ -31,12 +31,12 @@ namespace Repo_Inpatient_Care.ObjectRepository
         public IWebElement Submit_L { get => submit_L; set => submit_L = value; }
        
 
-        public Admin_DashboardPage EnterUsernameAndPassword()
+        public Admin_DashboardPage EnterUsernameAndPassword(string username,string password)
         {
             Console.WriteLine("navigated to Admin login page");
          
-            Username_L.SendKeys("admin");
-            Password_L.SendKeys("Test@12345");
+            Username_L.SendKeys(username);
+            Password_L.SendKeys(password);
             Submit_L.Click();
 
             return new Admin_DashboardPage(driver);

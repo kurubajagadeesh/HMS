@@ -10,9 +10,10 @@ namespace Repo_Inpatient_Care.GenericUtilitys
 {
     public class JsonUtility
     {
-        public static string GetJsonKeyValue(string key,string path)
+        public static string GetJsonKeyValue(string key)
         {
-           string jsonContent= File.ReadAllText(path);
+            string path = IConstants.JSONFILEPATH;
+            string jsonContent= File.ReadAllText(path);
             JToken jtoken=JToken.Parse(jsonContent);
 
             //  string keyValue= jtoken.SelectToken(key).ToString();
@@ -21,8 +22,9 @@ namespace Repo_Inpatient_Care.GenericUtilitys
             return keyValue;
         }
 
-        public static IEnumerable<GetJsonData> JsonDataSet(string path)
+        public static IEnumerable<GetJsonData> JsonDataSet()
         {
+            string path = IConstants.JSONFILEPATH;
             string jsonContent = File.ReadAllText(path);
             GetJsonData commonData = JsonConvert.DeserializeObject<GetJsonData>(jsonContent);
            yield return commonData;

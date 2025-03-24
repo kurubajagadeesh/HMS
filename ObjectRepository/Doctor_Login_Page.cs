@@ -2,7 +2,8 @@
 
 using OpenQA.Selenium;
 using Repo_Inpatient_Care.NewFolder;
-using SeleniumExtras.PageObje
+ 
+using SeleniumExtras.PageObjects;
 using System.Net;
 
 
@@ -14,12 +15,11 @@ namespace Repo_Inpatient_Care.ObjectRepository
     public class Doctor_Login_Page : WebDriverUtility
     {
 
-        public Doctor_Login_Page(IWebDriver driver)
+        public Doctor_Login_Page(IWebDriver driver):base(driver)
         {
-
-            PageFatory.initElements(driver, this);
-        }
-
+            this.driver = driver;
+            PageFactory.InitElements(driver, this);
+        } 
         [FindsBy(How = How.Id, Using = "username")]
         private IWebElement username;
 
@@ -35,13 +35,6 @@ namespace Repo_Inpatient_Care.ObjectRepository
         public IWebElement submit_1 { get => submit; set => submit = value; }
 
         //Business logic
-        public void Doctor_DashboardPage()
-        {
-            Console.WriteLine("navigated to Doctor login page");
-            username.SendKeys("Khan345@gmail.com");
-            password.SendKeys("Test@123");
-            submit.Click();
-            PageFactory.InitElement(driver, this); 
-        }
+        
     }
 }
