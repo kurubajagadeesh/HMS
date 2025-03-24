@@ -1,5 +1,19 @@
 {
-    "username": "admin",
-    "password": "admin"
-    
+    "applicationUrl": "http://49.249.28.218:8081/AppServer/Hospital_Doctor_Patient_Management_System/",
+    "adminURL": "http://49.249.28.218:8081/AppServer/Hospital_Doctor_Patient_Management_System/hms/admin/",
+    "doctorURL": "http://49.249.28.218:8081/AppServer/Hospital_Doctor_Patient_Management_System/hms/doctor/",
+    "patientURL": "http://49.249.28.218:8081/AppServer/Hospital_Doctor_Patient_Management_System/hms/user-login.php",
+
+    "adminloginConfig": {
+        "username": "admin",
+        "password": "Test@12345"
+    },
+    "doctorloginConfig": {
+        "username": "anujk123@test.com",
+        "password": "Test@123"
+    },
+    "patientloginConfig": {
+        "username": "vajobygy@logsmarter.net",
+        "password": "Test@1234"
+    }
 }

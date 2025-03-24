@@ -6,21 +6,24 @@ using System.Threading.Tasks;
 using DocumentFormat.OpenXml.Bibliography;
 using OpenQA.Selenium;
 using Repo_Inpatient_Care.Constants;
+using Repo_Inpatient_Care.GenericUtilitys;
 using Repo_Inpatient_Care.NewFolder;
 using SeleniumExtras.PageObjects;
 
 namespace Repo_Inpatient_Care.ObjectRepository
 {
-    public class HomePage
+    public sealed  class HomePage:WebDriverUtility
     {
-        private IWebDriver driver;
-        //This is the Object Repository for HomePag
-        public HomePage(IWebDriver driver) : base(driver)
+       // private IWebDriver driver;
+         
+        public HomePage(Browsers browser) : base(browser)
         {
-            this.driver = driver;
+              
             PageFactory.InitElements(driver, this);
             MaximizeWindow();
-            loadWebapp("http://49.249.28.218:8081/AppServer/Hospital_Doctor_Patient_Management_System/");
+            
+            loadWebapp(JsonUtility.GetJsonKeyValue("applicationUrl"));
+
 
         }
         [FindsBy(How = How.XPath, Using = "//a[text()='Logins']")]
@@ -29,7 +32,7 @@ namespace Repo_Inpatient_Care.ObjectRepository
         private IWebElement adminLog_L;
         [FindsBy(How = How.XPath, Using = "//a[@href='hms/doctor']")]
         private IWebElement doctorLog_L;
-        [FindsBy(How = How.XPath, Using = "//a[@href='hms/patient']")]
+        [FindsBy(How = How.XPath, Using = "//a[@href='hms/user-login.php']")]
         private IWebElement patientLog_L;
 
 
@@ -60,10 +63,12 @@ namespace Repo_Inpatient_Care.ObjectRepository
             switchToWindows();
             return new Doctor_Login_Page(driver);
         }
-        public void GoToPationLoginPage()
+        public Patient_Login_Page GoToPatientLoginPage()
         {
             ClickOnElement(logins);
             ClickOnElement(PatientLog_L);
+            switchToWindows();
+            return new Patient_Login_Page(driver);
         }
     }
 }

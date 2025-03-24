@@ -46,7 +46,7 @@ namespace Repo_Inpatient_Care.NewFolder
         }
         public IWebDriver GetDriver()
         {
-            return Driver;
+            return driver;
         }
         /**
  * This method is used to opent new browser by using browser name
@@ -54,34 +54,12 @@ namespace Repo_Inpatient_Care.NewFolder
  
  */
 
-        public IWebDriver LuanchEmptyBrowser(string browser)
-        {
-            //Launch an empty browser
-            if (browser.Equals("chrome", StringComparison.CurrentCultureIgnoreCase))
-            {
-                driver = new ChromeDriver();
-                return Driver;
-            }
-            else if (browser.Equals("FireFox", StringComparison.CurrentCultureIgnoreCase))
-            {
-                driver = new FirefoxDriver();
-                return Driver;
-            }
-            else if (browser.Equals("Edge", StringComparison.CurrentCultureIgnoreCase))
-            {
-                driver = new EdgeDriver();
-                return Driver;
-            }
-            else
-            {
-                throw new Exception(browser + "is null");
-            }
 
-        }
 
-        public IWebDriver getDriver()
+        public  IWebElement WaitAndFindElement( By locator, int timeoutInSeconds = 10)
         {
-            return driver;
+            WebDriverWait  wait = new WebDriverWait(driver, TimeSpan.FromSeconds(timeoutInSeconds));
+            return wait.Until(driver => driver.FindElement(locator));
         }
         //this method is used to load new app
         public void loadWebapp(string url)
@@ -111,9 +89,9 @@ namespace Repo_Inpatient_Care.NewFolder
             Driver.Manage().Window.Minimize();
         }
 
-        public void ImplicityWait(long sec)
+        public void ImplicityWait()
         {
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(sec);
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
         }
         /**
  * This method is used to wait until page load
@@ -136,6 +114,16 @@ namespace Repo_Inpatient_Care.NewFolder
         {
 
             element.SendKeys(value);
+        }
+
+
+        public void WaitUntilEleIsVisibleAndScrollToEleAndClick(By locators)
+        {
+            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+            var element = wait.Until(ExpectedConditions.ElementToBeClickable(locators));
+            ((IJavaScriptExecutor)driver).ExecuteScript("arguments[0].scrollIntoView(true);", element);
+            element.Click();
+
         }
 
         /**
@@ -184,7 +172,7 @@ namespace Repo_Inpatient_Care.NewFolder
  * @param element
  * @param value
  */
-        public void dropdown(IWebElement element, string value)
+        public void SelectByValue(IWebElement element, string value)
         {
             SelectElement selct = new SelectElement(element);
             selct.SelectByValue(value);
@@ -378,13 +366,35 @@ namespace Repo_Inpatient_Care.NewFolder
                 }
             }
         }
+
+        public bool IsAlertPresent()
+        {
+            try
+            {
+                Driver.SwitchTo().Alert();
+                return true;
+            }
+            catch (NoAlertPresentException e)
+            {
+                return false;
+            }
+        }
+
         /*
          * this method is used to swith to alert and acceptAlert
          * @param driver
          * */
-        public void acceptAlert()
+        public void AcceptAlertIfPresent()
         {
-            Driver.SwitchTo().Alert().Accept();
+           // Driver.SwitchTo().Alert().Accept();
+           if(IsAlertPresent())
+            {
+                Driver.SwitchTo().Alert().Accept();
+            }
+            else
+            {
+                Console.WriteLine("Alert is not present");
+            }
         }
         /*
          * this method is used to swith to alert and cancleAlert
@@ -441,11 +451,11 @@ namespace Repo_Inpatient_Care.NewFolder
         {
             ITakesScreenshot screenshot = (ITakesScreenshot)driver;
             Screenshot image = screenshot.GetScreenshot();
-            // string path =Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName;
+             string path =Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName;
             // string title = driver.Title+".Png";
 
             //string filePath = Path.Combine(path , title);
-            string path = "C:\\Users\\91996\\source\\repos\\Repo Inpatient Care\\Repo Inpatient Care\\Screenshot\\";
+          //  string path = "C:\\Users\\91996\\source\\repos\\Repo Inpatient Care\\Repo Inpatient Care\\Screenshot\\";
 
             string filepath=Path.Combine(path + screenshotName+".png");
             image.SaveAsFile(filepath);
